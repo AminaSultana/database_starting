@@ -2,14 +2,15 @@ import React, { useState, useEffect, useCallback } from "react";
 
 import MoviesList from "./components/MoviesList";
 import "./App.css";
+import AddMovie from "./components/AddMovie";
 
 function App() {
   const [getData, setGetData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
-  const [btn, setBtn]=useState(false);
+  const [btn, setBtn] = useState(false);
 
-  const fetchUser= useCallback(async()=> {
+  const fetchUser = useCallback(async () => {
     try {
       console.log("function called");
       setIsLoading(true);
@@ -28,7 +29,7 @@ function App() {
     } catch (error) {
       setError(error.message);
     }
-  }, [])
+  }, []);
 
   console.log("App");
   useEffect(() => {
@@ -42,11 +43,18 @@ function App() {
   if (!isLoading && getData.length > 0) {
     content = <MoviesList users={getData} />;
   }
-const func = ()=>{
-  setBtn(prev=>!prev)
-}
+  const func = () => {
+    setBtn((prev) => !prev);
+  };
+
+  const movieAddHandler = (movie) => {
+    console.log(movie.title);
+  };
   return (
     <React.Fragment>
+      <section>
+        <AddMovie onAddMovie={movieAddHandler}></AddMovie>
+      </section>
       <section>
         <button onClick={func}>Fetch Users</button>
         <button>Cancel</button>
