@@ -4,9 +4,10 @@ import Movie from './Movie';
 import classes from './MoviesList.module.css';
 
 const MovieList = (props) => {
+  console.log("Movielist");
   return (
     <ul className={classes['movies-list']}>
-      {props.movies.map((user) => (
+      {props.users.map((user) => (
         <Movie
           key={user.id}
           name={user.name}
@@ -17,4 +18,4 @@ const MovieList = (props) => {
   );
 };
 
-export default MovieList;
+export default React.memo(MovieList);
